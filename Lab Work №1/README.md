@@ -23,7 +23,7 @@ _Для специалистов технического обслуживани
 
 _Для аналитиков и системных администраторов_
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/8dd49888-972f-4764-b6c4-2cac943c5948)
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/a0806811-5e07-4e43-bdaa-5b556dc862b0)
 
 **Допущения о ограничения:**
 Старт происходит в городе Москва из-за высокой концентрации капитала. 
