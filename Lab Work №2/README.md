@@ -1,6 +1,6 @@
 **Диаграмма системного контекста:**
 
-<img width="241" alt="image" src="https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/b744e34f-5995-4f88-9f4e-6d3fc2c2490a">
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/218f5f64-7f52-489d-b9df-98f25d54ac1b)
 
 **Диаграмма контейнеров:**
 
