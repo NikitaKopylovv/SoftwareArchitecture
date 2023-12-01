@@ -4,7 +4,7 @@
 
 **Диаграмма контейнеров:**
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/41a6cf9d-8b69-4ae5-8a9b-52da4f849a60)
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/93c64e41-137a-4248-8728-f3a1980643f0)
 
 **Диаграмма компонентов:**
 
