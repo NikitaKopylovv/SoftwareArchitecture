@@ -1,3 +1,3 @@
 **Диаграмма компонентов**
 
-<img width="722" alt="image" src="https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/ac97071c-dcfc-42f8-a932-e57aa9edc0dc">
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/a9ba01fb-bf4a-47b2-9621-4bc43958d35e)
