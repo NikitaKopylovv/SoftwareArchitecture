@@ -1,17 +1,37 @@
 **Тестирование GET запроса**
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/8da52401-0f3e-4c93-8ea2-d571ffd358df)
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/fe23b2f5-5275-46d1-8de1-6d08be3846a1)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/30733821-1460-4f83-a983-4c3acbaee4e6)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/6f73b5ba-2609-46ea-9867-4c857242e717)
 
 **Тестирование GET запроса по айди**
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/aa1b8bce-a594-401a-b264-4b7d2f768ed9)
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/cc381e88-c4b0-4473-9d3e-926838026ecb)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/32f867b0-987c-466a-8c7c-9259412fa344)
 
 **Тестирование POST запроса**
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/a5c6da2f-5287-4e10-afc3-3b41fd05e987)
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/39863252-adab-4a4f-a3b9-6395ff50d63f)
 
-****Тестирование GET запроса по вхождению строки в имя**
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/c928c1f9-a86a-4c07-8935-f3a3f991366a)
 
-<img width="1003" alt="image" src="https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/7befeb79-1fbd-45f0-a610-40cb97f42566">
+**Тестирование GET запроса по вхождению строки в имя**
 
-<img width="790" alt="image" src="https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/d80f1067-4ac7-4c09-81e3-1827c2362c03">
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/3b92158a-aa6c-4cf8-8597-05cdbebfc5af)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/3efd56ed-39a9-4525-9057-f99aaea08b1f)
+
+**Создание нового сотрудника**
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/569b79f7-36ed-418d-8bd0-eb97c8192a30)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/3c0c2161-0d63-4daa-81d9-fe7f8b80df28)
+
+**Получение статуса по Id автомата**
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/d2c90f95-91c9-4fb4-84c8-ab8029237f53)
+
+![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/0adefba7-4789-4823-95b2-353d12aea2d8)
