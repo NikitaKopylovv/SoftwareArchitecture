@@ -1,22 +1,22 @@
-**Тестирование GET запроса**
+**Получение списка всех автоматов**
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/30733821-1460-4f83-a983-4c3acbaee4e6)
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/6f73b5ba-2609-46ea-9867-4c857242e717)
 
-**Тестирование GET запроса по айди**
+**Получение сотрудника по id**
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/cc381e88-c4b0-4473-9d3e-926838026ecb)
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/32f867b0-987c-466a-8c7c-9259412fa344)
 
-**Тестирование POST запроса**
+**Добавление автомата**
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/39863252-adab-4a4f-a3b9-6395ff50d63f)
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/c928c1f9-a86a-4c07-8935-f3a3f991366a)
 
-**Тестирование GET запроса по вхождению строки в имя**
+**Получение сотрудника по вхождению строки в имя**
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/3b92158a-aa6c-4cf8-8597-05cdbebfc5af)
 
