@@ -1,7 +1,5 @@
 **Тестирование GET запроса**
 
-![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/fe23b2f5-5275-46d1-8de1-6d08be3846a1)
-
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/30733821-1460-4f83-a983-4c3acbaee4e6)
 
 ![image](https://github.com/Justalegend1/SoftwareArchitecture/assets/74319066/6f73b5ba-2609-46ea-9867-4c857242e717)
