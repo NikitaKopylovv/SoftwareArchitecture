@@ -40,7 +40,6 @@ namespace SimpleApi.Controllers
         [HttpGet("get/employee/{id}")]
         public IActionResult GetEmployeeById(int id)
         {
-            Console.WriteLine(id);
             var item = employees.Find(i => i.Id == id);
             if (item == null)
             {
@@ -48,6 +47,37 @@ namespace SimpleApi.Controllers
             }
             return Ok(new { item.Name, item.Surname });
         }
+
+        [HttpPut("update/vending-machines/{machine_id}")]
+        public IActionResult UpdateAutomat(int machine_id, [FromBody] Automat updatedItem)
+        {
+            var existingItem = automats.Find(i => i.id_automat == machine_id);
+            if (existingItem == null)
+            {
+                return NotFound();
+            }
+
+            existingItem.id_adress = updatedItem.id_adress;
+            existingItem.id_cell = updatedItem.id_cell;
+            existingItem.operable = updatedItem.operable;
+
+            return Ok(existingItem);
+        }
+
+        [HttpDelete("delete/vending-machines/{machine_id}")]
+        public IActionResult DeleteAutomat(int machine_id)
+        {
+            var existingItem = automats.Find(i => i.id_automat == machine_id);
+            if (existingItem == null)
+            {
+                return NotFound();
+            }
+
+            automats.Remove(existingItem);
+
+            return Ok(new { message = "Запись о вендинговом аппарате успешно удалена." });
+        }
+
 
         [HttpPost("add/employee")]
         public IActionResult AddEmployee([FromBody] Employee newItem)
@@ -66,7 +96,6 @@ namespace SimpleApi.Controllers
         [HttpGet("get/vending/{machine_id}/status")]
         public IActionResult GetAutomatById(int machine_id)
         {
-            Console.WriteLine(machine_id);
             var item = automats.Find(i => i.id_automat == machine_id);
             if (item == null)
             {
@@ -92,7 +121,6 @@ namespace SimpleApi.Controllers
         [HttpPost("add")]
         public IActionResult CreateAutomat([FromBody] Automat newItem)
         {
-            Console.WriteLine(newItem);
             if (newItem == null)
             {
                 return BadRequest("Invalid data");
