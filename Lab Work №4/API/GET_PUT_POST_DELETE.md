@@ -126,7 +126,7 @@ _6. Обновление записи об аппарате (Update Vending Mach
 
 Метод: PUT
 
-Путь: /vending-machines/{machine_id}
+Путь: /update/vending-machines/{machine_id}
 
 Описание: Обновляет информацию о конкретном вендинговом аппарате.
 
@@ -152,7 +152,7 @@ _7. Удаление записи о клиенте (Delete Customer Record)_
 
 Метод: DELETE
 
-Путь: /customers/{customer_id}
+Путь: /delete/vending-machines/{machine_id}
 
 Описание: Удаляет запись о клиенте.
 
