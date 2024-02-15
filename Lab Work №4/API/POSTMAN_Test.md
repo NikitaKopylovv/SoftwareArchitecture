@@ -110,3 +110,9 @@ pm.test("Response contains created automat data", function () {
     pm.response.to.have.jsonBody("operable", true);
 });
 ```
+
+**Результаты**
+<img width="1319" alt="image" src="https://github.com/NikitaKopylovv/SoftwareArchitecture/assets/74319066/cb5a0961-a7b2-440e-98bb-35970e1eec53">
+
+<img width="1322" alt="image" src="https://github.com/NikitaKopylovv/SoftwareArchitecture/assets/74319066/4acd4cb9-9e2f-4e2b-bab1-d08aaf5b0808">
+
