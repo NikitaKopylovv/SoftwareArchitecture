@@ -32,4 +32,7 @@ CMD ["node", "/app/src/index.js"]
 
 **Docker контейнер**
 
-<img width="504" alt="image" src="https://github.com/NikitaKopylovv/SoftwareArchitecture/assets/74319066/a8f361e8-ea8a-4481-b522-578d809d334a">
+```pwsh
+2024-02-20 01:47:31 Using sqlite database at /etc/paps/paps.db
+2024-02-20 01:47:31 Listening on port 3000
+```
