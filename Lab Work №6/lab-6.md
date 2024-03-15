@@ -344,3 +344,180 @@ const vendingMachine2 = new DrinkVendingMachine(cardPayment);
 vendingMachine1.pay(1.5);
 vendingMachine2.pay(1.5);
 ```
+
+### Компоновщик
+
+Компоновщик - структурный шаблон проектирования, который позволяет клиентам обращаться к отдельным объектам и композициям объектов одинаковым образом. Он позволяет создавать древовидные структуры из объектов и работать с ними так, будто это одиночные объекты.
+
+_Схема_
+
+```mermaid
+classDiagram
+    interface VendingComponent
+    
+    class Product {
+        -name: string
+        -price: number
+        +constructor(name: string, price: number)
+        +getPrice(): number
+    }
+
+    class ProductGroup {
+        -products: VendingComponent[]
+        +addProduct(product: VendingComponent): void
+        +getPrice(): number
+    }
+
+    VendingComponent <|.. Product : implements
+    VendingComponent <|.. ProductGroup : implements
+    ProductGroup --> "*" Product : contains
+```
+
+**Код**
+
+```typescript
+// Компонент
+interface VendingComponent {
+    getPrice(): number;
+}
+
+// Листовой компонент - продукт
+class Product implements VendingComponent {
+    constructor(private name: string, private price: number) {}
+
+    getPrice(): number {
+        return this.price;
+    }
+}
+
+// Контейнерный компонент - группа продуктов
+class ProductGroup implements VendingComponent {
+    private products: VendingComponent[] = [];
+
+    addProduct(product: VendingComponent) {
+        this.products.push(product);
+    }
+
+    getPrice(): number {
+        return this.products.reduce((total, product) => total + product.getPrice(), 0);
+    }
+}
+
+// Использование
+const cola = new Product("Cola", 1.5);
+const chips = new Product("Chips", 2);
+
+const productGroup = new ProductGroup();
+productGroup.addProduct(cola);
+productGroup.addProduct(chips);
+
+console.log(productGroup.getPrice());
+```
+
+### Декоратор
+
+Декоратор - это структурный шаблон проектирования, который позволяет добавлять новое поведение или функциональность объекту, не изменяя его основной структуры.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class Product {
+        +getDescription(): string
+        +getPrice(): number
+    }
+
+    class Drink {
+        +getDescription(): string
+        +getPrice(): number
+    }
+
+    class ProductDecorator {
+        -product: Product
+        +constructor(product: Product)
+        +getDescription(): string
+        +getPrice(): number
+    }
+
+    class IceDecorator {
+        +getDescription(): string
+        +getPrice(): number
+    }
+
+    class LemonDecorator {
+        +getDescription(): string
+        +getPrice(): number
+    }
+
+    Product <|.. Drink : implements
+    Product <|.. ProductDecorator : implements
+    ProductDecorator <|-- IceDecorator : extends
+    ProductDecorator <|-- LemonDecorator : extends
+    Product --> ProductDecorator : uses
+```
+
+**Код**
+
+```typescript
+// Интерфейс продукта
+interface Product {
+    getDescription(): string;
+    getPrice(): number;
+}
+
+// Конкретный продукт
+class Drink implements Product {
+    getDescription() {
+        return "Cola";
+    }
+
+    getPrice() {
+        return 1.5;
+    }
+}
+
+// Декоратор
+abstract class ProductDecorator implements Product {
+    constructor(protected product: Product) {}
+
+    getDescription(): string {
+        return this.product.getDescription();
+    }
+
+    getPrice(): number {
+        return this.product.getPrice();
+    }
+}
+
+// Конкретные декораторы
+class IceDecorator extends ProductDecorator {
+    getDescription(): string {
+        return `${this.product.getDescription()} with ice`;
+    }
+
+    getPrice(): number {
+        return this.product.getPrice() + 0.5;
+    }
+}
+
+class LemonDecorator extends ProductDecorator {
+    getDescription(): string {
+        return `${this.product.getDescription()} with lemon`;
+    }
+
+    getPrice(): number {
+        return this.product.getPrice() + 0.3;
+    }
+}
+
+let drink: Product = new Drink();
+console.log(drink.getDescription(), drink.getPrice()); 
+
+drink = new IceDecorator(drink);
+console.log(drink.getDescription(), drink.getPrice()); 
+
+drink = new LemonDecorator(drink);
+console.log(drink.getDescription(), drink.getPrice()); 
+```
+
+**Поведенческие шаблоны**
