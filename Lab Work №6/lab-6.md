@@ -521,3 +521,383 @@ console.log(drink.getDescription(), drink.getPrice());
 ```
 
 **Поведенческие шаблоны**
+
+### Цепочка обязанностей
+
+Цепочка обязанностей - поведенческий шаблон проектирования, который позволяет передавать запросы последовательно по цепочке обработчиков, пока один из них не обработает запрос.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class Handler {
+        +setNext(handler: Handler): Handler
+        +handleRequest(amount: number): void
+    }
+
+    class StockManager {
+        -nextHandler: Handler
+        +setNext(handler: Handler): Handler
+        +handleRequest(amount: number): void
+    }
+
+    class Cashier {
+        +setNext(handler: Handler): Handler
+        +handleRequest(amount: number): void
+    }
+
+    class Manager {
+        +setNext(handler: Handler): Handler
+        +handleRequest(amount: number): void
+    }
+
+    Handler <|.. StockManager : implements
+    Handler <|.. Cashier : implements
+    Handler <|.. Manager : implements
+```
+
+**Код**
+
+```typescript
+// Обработчик запроса
+interface Handler {
+    setNext(handler: Handler): Handler;
+    handleRequest(amount: number): void;
+}
+
+// Конкретный обработчик
+class StockManager implements Handler {
+    private nextHandler: Handler;
+
+    setNext(handler: Handler): Handler {
+        this.nextHandler = handler;
+        return handler;
+    }
+
+    handleRequest(amount: number): void {
+        if (amount >= 10) {
+            console.log("Stock refilled");
+        } else if (this.nextHandler) {
+            console.log("Passing request to next handler");
+            this.nextHandler.handleRequest(amount);
+        } else {
+            console.log("Unable to handle request");
+        }
+    }
+}
+
+
+const stockManager = new StockManager();
+stockManager.setNext(new Cashier()).setNext(new Manager()); // Cashier - абстрактный получатель команды, например, для проведения оплаты продукта
+
+stockManager.handleRequest(15); // Output: Stock refilled
+stockManager.handleRequest(5);  // Output: Passing request to next handler
+```
+
+### Команда
+
+Команда - поведенческий паттерн проектирования, который превращает запросы в объекты, позволяя передавать их как аргументы при вызове методов, ставить запросы в очередь, логировать их, а также поддерживать отмену операций.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class Command {
+        +execute(): void
+    }
+
+    class OrderDrinkCommand {
+        -vendingMachine: VendingMachine
+        +constructor(vendingMachine: VendingMachine)
+        +execute(): void
+    }
+
+    class VendingMachine {
+        +orderDrink(): void
+    }
+
+    class Invoker {
+        -command: Command | null
+        +setCommand(command: Command): void
+        +executeCommand(): void
+    }
+
+    Command <|.. OrderDrinkCommand : implements
+    OrderDrinkCommand --> VendingMachine : uses
+    Invoker *-- Command : works with
+```
+
+**Код**
+
+```typescript
+// Команда
+interface Command {
+    execute(): void;
+}
+
+// Конкретная команда
+class OrderDrinkCommand implements Command {
+    constructor(private vendingMachine: VendingMachine) {}
+
+    execute(): void {
+        this.vendingMachine.orderDrink();
+    }
+}
+
+// Получатель
+class VendingMachine {
+    orderDrink(): void {
+        console.log("Ordering drink...");
+    }
+}
+
+// Исполнитель команд
+class Invoker {
+    private command: Command | null = null;
+
+    setCommand(command: Command): void {
+        this.command = command;
+    }
+
+    executeCommand(): void {
+        if (this.command) {
+            this.command.execute();
+        } else {
+            console.log("No command set");
+        }
+    }
+}
+
+const vendingMachine = new VendingMachine();
+const orderDrinkCommand = new OrderDrinkCommand(vendingMachine);
+const invoker = new Invoker();
+
+invoker.setCommand(orderDrinkCommand);
+invoker.executeCommand(); 
+```
+
+### Итератор
+
+Итератор - поведенческий шаблон проектирования. Представляет собой объект, позволяющий получить последовательный доступ кэлементам объекта-агрегата без использования описаний каждого из агрегированных объектов.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class Iterator {
+        hasNext(): boolean
+        next(): any
+    }
+
+    class Aggregator {
+        getIterator(): Iterator
+    }
+
+    class ProductIterator {
+        -products: string[]
+        -position: number = 0
+        constructor(products: string[])
+        hasNext(): boolean
+        next(): string | null
+    }
+
+    class VendingMachineProducts {
+        -products: string[]
+        addProduct(product: string): void
+        getIterator(): Iterator
+    }
+
+    Aggregator "1" o-- "1" Iterator : uses
+    VendingMachineProducts "1" o-- "1" Iterator : uses
+    Iterator <|-- ProductIterator : implements
+```
+
+**Код**
+
+```typescript
+// Итератор
+interface Iterator<T> {
+    hasNext(): boolean;
+    next(): T | null;
+}
+
+// Агрегат
+interface Aggregator {
+    getIterator(): Iterator<string>;
+}
+
+// Конкретный итератор
+class ProductIterator implements Iterator<string> {
+    private products: string[];
+    private position: number = 0;
+
+    constructor(products: string[]) {
+        this.products = products;
+    }
+
+    hasNext(): boolean {
+        return this.position < this.products.length;
+    }
+
+    next(): string | null {
+        if (this.hasNext()) {
+            return this.products[this.position++];
+        } else {
+            return null;
+        }
+    }
+}
+
+// Конкретный агрегат
+class VendingMachineProducts implements Aggregator {
+    private products: string[] = [];
+
+    addProduct(product: string): void {
+        this.products.push(product);
+    }
+
+    getIterator(): Iterator<string> {
+        return new ProductIterator(this.products);
+    }
+}
+
+const vendingMachineProducts = new VendingMachineProducts();
+vendingMachineProducts.addProduct("Cola");
+vendingMachineProducts.addProduct("Chips");
+
+const iterator = vendingMachineProducts.getIterator();
+while (iterator.hasNext()) {
+    console.log(iterator.next());
+}
+```
+
+### Наблюдатель
+
+Наблюдатель - способ организации взаимодействия между объектами, где один объект наблюдает за изменениями в другом и автоматически получает уведомления о таких изменениях.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class ProductSubject {
+        -observers: Observer[]
+        +addObserver(observer: Observer): void
+        +removeObserver(observer: Observer): void
+        +notifyObservers(product: string): void
+    }
+
+    class Observer {
+        +update(product: string): void
+    }
+
+    class Customer {
+        +update(product: string): void
+    }
+
+    ProductSubject "1" --> "*" Observer : contains
+    ProductSubject <-- Customer : uses
+```
+
+**Код**
+
+```typescript
+// Наблюдаемый объект
+class ProductSubject {
+    private observers: Observer[] = [];
+
+    addObserver(observer: Observer): void {
+        this.observers.push(observer);
+    }
+
+    removeObserver(observer: Observer): void {
+        this.observers = this.observers.filter(o => o !== observer);
+    }
+
+    notifyObservers(product: string): void {
+        this.observers.forEach(observer => observer.update(product));
+    }
+}
+
+// Наблюдатель
+interface Observer {
+    update(product: string): void;
+}
+
+// Конкретный наблюдатель
+class Customer implements Observer {
+    update(product: string): void {
+        console.log(`Customer: ${product} is available`);
+    }
+}
+
+const productSubject = new ProductSubject();
+const customer1 = new Customer();
+const customer2 = new Customer();
+
+productSubject.addObserver(customer1);
+productSubject.addObserver(customer2);
+
+productSubject.notifyObservers("Cola");
+```
+
+### Шаблонный метод
+
+Шаблонный метод — паттерн проектирования, который определяет скелет алгоритма в базовом классе, но позволяет подклассам переопределить некоторые шаги этого алгоритма, не меняя его общей структуры.
+
+_Схема_
+
+```mermaid
+classDiagram
+    class VendingMachine {
+        +processOrder(): void
+        +selectProduct(): void
+        +processPayment(): void
+        +deliverProduct(): void
+    }
+
+    class DrinkVendingMachine {
+        +selectProduct(): void
+        +processPayment(): void
+        +deliverProduct(): void
+    }
+
+    VendingMachine <|-- DrinkVendingMachine : extends
+
+    VendingMachine <-- DrinkVendingMachine : uses
+```
+
+**Код**
+
+```typescript
+// Абстрактный класс вендингового автомата
+abstract class VendingMachine {
+    // Шаблонный метод
+    processOrder(): void {
+        this.selectProduct();
+        this.processPayment();
+        this.deliverProduct();
+    }
+
+    abstract selectProduct(): void;
+    abstract processPayment(): void;
+    abstract deliverProduct(): void;
+}
+
+// Конкретная реализация вендингового автомата
+class DrinkVendingMachine extends VendingMachine {
+    selectProduct(): void {
+        console.log("Selecting drink...");
+    }
+
+    processPayment(): void {
+        console.log("Processing payment for drink...");
+    }
+
+    deliverProduct(): void {
+        console.log("Delivering drink...");
+    }
+}
+
+const drinkVendingMachine = new DrinkVendingMachine();
+drinkVendingMachine.processOrder();
+```
